@@ -1,0 +1,175 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: AlertButtons(),
+    );
+  }
+}
+
+class AlertButtons extends StatelessWidget {
+  void showMaterialAlert(BuildContext context) {
+    // Función para mostrar la alerta de Material
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Material Alert'),
+          content: Text('Esta es una alerta con Material'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('Cerrar'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void showMaterialAlertWithOptions(BuildContext context) {
+    // Función para mostrar el Material Alert con opciones
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Material Alert with Options'),
+          content: Text('Esta es una alerta con opciones de Material.'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('Abrir'),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('Cancelar'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void showCupertinoAlert(BuildContext context) {
+    // Función para mostrar la alerta de Cupertino
+    showCupertinoDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return CupertinoAlertDialog(
+          title: Text('Cupertino Alert'),
+          content: Text('Esto es un cupertino alert'),
+          actions: <Widget>[
+            CupertinoDialogAction(
+              child: Text('Cerrar'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void showCupertinoActionSheet(BuildContext context) {
+    // Función para mostrar el CupertinoActionSheet
+    showCupertinoModalPopup<void>(
+      context: context,
+      builder: (BuildContext context) => CupertinoActionSheet(
+        title: Text('Perfil'),
+        message: Text('Message'),
+        actions: <CupertinoActionSheetAction>[
+          CupertinoActionSheetAction(
+            isDefaultAction: true,
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: Text('Configuración'),
+          ),
+          CupertinoActionSheetAction(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: Text('Sistema'),
+          ),
+          CupertinoActionSheetAction(
+            isDestructiveAction: true,
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: Text('Cerrar'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Alert Buttons'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.all(16),
+              child: OutlinedButton(
+                onPressed: () {
+                  showMaterialAlert(context);
+                },
+                child: Text('Show Material Alert'),
+              ),
+            ),
+
+            Padding(
+              padding: EdgeInsets.all(16),
+              child: ElevatedButton(
+                onPressed: () {
+                  showMaterialAlertWithOptions(context);
+                },
+                child: Text('Show Material Alert w options'),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.all(16),
+              child: ElevatedButton(
+                onPressed: () {
+                  showCupertinoAlert(context);
+                },
+                child: Text('Show Cupertino Alert'),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.all(16),
+              child: ElevatedButton(
+                onPressed: () {
+                  showCupertinoActionSheet(context);
+                },
+                child: Text('Show Cupertino w Options/ bottom'),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
